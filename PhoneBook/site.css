@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.v-align-middle {
+    vertical-align: middle;
+}
+
+.hero-container {
+    background-color: blueviolet;
+    color: whitesmoke;
+    height: 40px;
+    padding: 20px;
+    font-size: 34px;
+}
+
+.action-plane {
+    margin-left: 40px;
+    margin-top: 40px;
+    padding: 10px 10px;
+}
+
+.add-new {
+    display: inline-block;
+}
+
+.add-new .add-btn{
+    padding: 5px;
+    border-radius: 5px;
+    border-top-left-radius: 15px;
+    background-color: rgba(153, 82, 218, 0.75);
+    color: whitesmoke;
+    cursor: pointer;
+    box-shadow: 2px 2px 1px 0px #9158C5;
+}
+
+#toast-container > .toast {
+    background-image: none !important;
+}
+  
