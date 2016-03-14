@@ -3,13 +3,10 @@ var PhoneBook;
     var Models;
     (function (Models) {
         var Contact = (function () {
-            function Contact(name, email, phoneNumber, address, age, gender) {
+            function Contact(name, email, phoneNumber) {
                 this.Name = name;
                 this.Email = email;
                 this.PhoneNumber = phoneNumber;
-                this.Address = address;
-                this.Age = age;
-                this.Gender = gender;
             }
             return Contact;
         }());
@@ -59,6 +56,25 @@ var PhoneBook;
         var DomUtil = (function () {
             function DomUtil() {
             }
+            DomUtil.prototype.AddContact = function (contact) {
+                var _availableContacts = $('#contactList').children();
+                var addTemplate = this.getContactTemplate(_availableContacts.length + 1, contact);
+                $('#contactList').append(addTemplate);
+                this.HideAddForm();
+            };
+            DomUtil.prototype.DeleteContact = function (id) {
+                $('#' + id).remove();
+            };
+            DomUtil.prototype.getContactTemplate = function (id, contact) {
+                return "<li class='contact-item'><div>" + contact.Name + "</div><div>email:" + contact.Email + "</div><div>Phone" + contact.PhoneNumber + "</div>" +
+                    "<span class='del-btn lnr lnr-cross' id='" + id.toString() + "'></span>" + "</li>";
+            };
+            DomUtil.prototype.ShowAddForm = function () {
+                $('#contactAdd').show(200);
+            };
+            DomUtil.prototype.HideAddForm = function () {
+                $('#contactAdd').hide(100);
+            };
             return DomUtil;
         }());
         DomUtil_1.DomUtil = DomUtil;
@@ -67,8 +83,19 @@ var PhoneBook;
 var Notify = PhoneBook.Notifications;
 var PhoneBook;
 (function (PhoneBook) {
-    var Notifier = new Notify.Notifier();
-    $("#addBtn").click(function () {
-        Notifier.showInfo("Working Ganesh");
+    var _domUtil = new PhoneBook.DomUtil.DomUtil();
+    var _notifier = new Notify.Notifier();
+    $('#addBtn').click(function () { return _domUtil.ShowAddForm(); });
+    $('#closeBtn').click(function () { return _domUtil.HideAddForm(); });
+    $('#saveBtn').click(function () {
+        var contact = new PhoneBook.Models.Contact($('#contactName').val(), $('#contactEmail').val(), $('#contactPhone').val());
+        if (contact.Email == "" && contact.Name == "" && contact.PhoneNumber == "") {
+            _notifier.showInfo("Please fill the form to proceed");
+            return;
+        }
+        _domUtil.AddContact(contact);
+    });
+    $('.del-btn').click(function (event) {
+        var _target = event.target;
     });
 })(PhoneBook || (PhoneBook = {}));

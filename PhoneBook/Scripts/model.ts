@@ -7,20 +7,11 @@ module PhoneBook.Models {
         
         public PhoneNumber: string;
         
-        public Address: string;
-        
-        public Age: number;
-        
-        public Gender: string;
-        
-        constructor(name: string, email: string, phoneNumber:string, address: string, age: number, gender: string)
+        constructor(name: string, email: string, phoneNumber:string)
         {
             this.Name = name;
             this.Email = email;
             this.PhoneNumber = phoneNumber;
-            this.Address = address;
-            this.Age = age;
-            this.Gender = gender;
         }
     }
 }
